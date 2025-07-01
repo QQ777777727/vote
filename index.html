@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>每日投票链接</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f5f5f5;
+            font-family: sans-serif;
+        }
+        .vote-page {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .logo {
+            display: block;
+            margin: 30px auto 10px;
+            width: 250px;
+        }
+        .date-text {
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        .vote-block {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .label-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .vote-image {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .tip-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #666;
+        }
+        .link-text {
+            font-size: 16px;
+            color: #007aff;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="vote-page">
+    <img class="background" src="https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/品牌介绍背景.png" alt="" />
+    <img class="logo" src="https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/logo.png" alt="Logo" />
+    <div class="date-text" id="dateText"></div>
+    <div id="voteList"></div>
+</div>
+
+<script>
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const key = `${month}-${day}`;
+
+    const voteData = {
+        '7-2': {
+            images: [
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img1.jpg',
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img2.jpg'
+            ],
+            links: [
+                'https://vote.huotp.cn/project/666b3dfs-51388077',
+                'https://vote.huotp.cn/project/3lx5k8ke-51388095'
+            ]
+        },
+        '7-3': {
+            images: [
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img3.jpg',
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img4.jpg'
+            ],
+            links: [
+                'https://vote.huotp.cn/project/51qlq1nx-51388109',
+                'https://vote.huotp.cn/project/644uwb67-51388124'
+            ]
+        },
+        '7-4': {
+            images: [
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img5.jpg',
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img6.jpg'
+            ],
+            links: [
+                'https://vote.huotp.cn/project/xmn08lj5-51388143',
+                'https://vote.huotp.cn/project/7cfwxli1-51388158'
+            ]
+        },
+        '7-5': {
+            images: [
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img7.jpg',
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img8.jpg'
+            ],
+            links: [
+                'https://vote.huotp.cn/project/leeuwwd4-51388175',
+                'https://vote.huotp.cn/project/0e1bc41v-51388188'
+            ]
+        },
+        '7-6': {
+            images: [
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img9.jpg',
+                'https://cdn.jsdelivr.net/gh/QQ777777727/vote/static/img10.jpg'
+            ],
+            links: [
+                'https://vote.huotp.cn/project/jt9p4yvc-51388200',
+                'https://vote.huotp.cn/project/1y3vt1fg-51388210'
+            ]
+        }
+    };
+
+    const todayData = voteData[key];
+    const dateTextEl = document.getElementById('dateText');
+    const voteListEl = document.getElementById('voteList');
+    dateTextEl.textContent = `今日（${month}月${day}日）的投票链接：`;
+
+    if (todayData) {
+        todayData.images.forEach((img, index) => {
+            const link = todayData.links[index];
+            const groupLabel = index === 0 ? '第一组投票链接：' : '第二组投票链接：';
+
+            const block = document.createElement('div');
+            block.className = 'vote-block';
+            block.innerHTML = `
+          <div class="label-text">${groupLabel}</div>
+          <img src="${img}" alt="投票图" class="vote-image" />
+          <div class="tip-text">请扫描上方二维码或点击下方链接参与投票：</div>
+          <a class="link-text" href="${link}">${link}</a>
+        `;
+            voteListEl.appendChild(block);
+        });
+    }
+</script>
+</body>
+</html>
